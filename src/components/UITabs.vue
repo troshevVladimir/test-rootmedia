@@ -1,63 +1,39 @@
 <template>
   <div class="tabs">
-    <div class="tabs__buttons" ref="">
-      <div
+    <ul class="tabs__buttons" >
+      <li
         class="tabs__button"
-        :class="{ 'tabs__button--active': tab.active }"
-        v-for="tab in tabs"
+        :class="{ 'tabs__button--active': tab.isActive }"
+        v-for='tab in tabsArray'
+        @click='selectTab(tab.id)'
         :key="tab.id"
-        @click="changeActive(tab.id)"
       >
-        <component :is="tab.icon"></component>{{ tab.name }}
-      </div>
-    </div>
-    <div class="tabs__body">
-      <div class="tabs__content">
-        <slot/>
-      </div>
-      <div class="pooup-btn"><span class="pooup-btn__icon"></span>ОТКРЫТЬ ФИЛЬТРЫ</div>
-      <CatalogFilters></CatalogFilters>
-    </div>
+        <component :is="tab.icon"></component>{{ tab.title }}
+      </li>
+    </ul>
+    <Sort class="catalog-sort"/>
+    <slot/>
   </div>
 
 </template>
 
 <script>
-import CatalogFilters from "./CatalogFilters.vue";
 import SVGsneakers from "@/assets/icons/SVGsneakers.vue";
 import SVGsweatpants from "@/assets/icons/SVGsweatpants.vue";
-// import UITab from "./UITab.vue";
+import Sort from './UISort.vue'
+
 export default {
-  components: {CatalogFilters, SVGsneakers, SVGsweatpants},
+  components: { SVGsneakers, SVGsweatpants, Sort},
   data() {
     return {
       selectedIndex: 0,
       tabsArray: [],
-      tabs: [
-        {
-          id: 0,
-          name: 'Обувь',
-          icon: 'SVGsneakers',
-          active: true
-        },
-        {
-          id: 1,
-          name: 'Другая одежда',
-          icon: 'SVGsweatpants',
-          active: false
-        }
-      ]
     }
   },
   methods: {
-    changeActive (id) {
-      this.tabs = this.tabs.map(el => {
-        if (el.id === id ) {
-          el.active = true
-        } else {
-          el.active = false
-        }
-        return el
+    selectTab (id) {
+      this.tabsArray.forEach((tab) => {
+        tab.isActive = (tab.id === id)
       })
     }
   }
@@ -77,8 +53,6 @@ export default {
     @media screen and (max-width: 768px) {
       flex-direction: column;
     }
-
-
 
     .pooup-btn {
       width: 100%;
@@ -162,6 +136,7 @@ export default {
     z-index: 10;
 
     svg {
+      flex-shrink: 0;
       margin-right: 14px;
       path {
         fill: currentColor;

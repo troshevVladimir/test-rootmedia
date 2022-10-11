@@ -1,20 +1,24 @@
 <template>
   <Tabs>
-    <Sort class="catalog-sort"/>
-    <div class="cards">
-      <Card v-for="(card, idx) in cards" :key="idx" :data="card"/>
-    </div>
-    <button class="load-more">ЗАГРУЗИТЬ ЕЩЕ</button>
+    <Tab title="Обувь" icon="SVGsneakers" selected :id="0">
+      <div class="cards">
+        <Card v-for="(card, idx) in cards" :key="idx" :data="card"/>
+      </div>
+      <button class="load-more">ЗАГРУЗИТЬ ЕЩЕ</button>
+    </Tab>
+    <Tab title="Другая одежда" icon="SVGsweatpants" :id="1">
+      <h2>Тут пока что ещё ничего нет</h2>
+    </Tab>
   </Tabs>
 </template>
 
 <script>
 import Tabs from './UITabs.vue'
+import Tab from './UITab.vue'
 import Card from './UICard.vue'
-import Sort from './UISort.vue'
 
 export default {
-  components: {Tabs, Card, Sort},
+  components: {Tabs, Tab, Card},
   data() {
     return {
       cards: [
