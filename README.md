@@ -1,24 +1,2 @@
-# test-rootmedia-catalog-with-filters
-
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Для запуска проекта `yarn install && yarn build && yarn serve`
+Для для сборки  `yarn install && yarn build`
